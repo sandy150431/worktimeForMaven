@@ -1,0 +1,31 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<footer style="padding:200px 0 0; right:0px; left:0px;">
+		<div class="sub-footer" >
+		<div style="margin-left: 30px; margin-right:30px;">
+			<div class="row" style="width:100%;">
+				<div class="col-sm-6 col-md-6 col-lg-6">
+					<div class="wow fadeInLeft" data-wow-delay="0.1s">
+					<div class="text-left">
+					<p>&copy;Copyright - 輔大資訊系統開發培訓班-第一組. All rights reserved.</p>
+					</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-6 col-lg-6">
+					<div class="wow fadeInRight" data-wow-delay="0.1s">
+    					<div class="text-right">
+    						<div class="credits">
+                                <!-- 
+                                    All the links in the footer should remain intact. 
+                                    You can delete the links only if you purchased the pro version.
+                                    Licensing information: https://bootstrapmade.com/license/
+                                    Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Medicio
+                                -->
+                                <a href="https://bootstrapmade.com/free-business-bootstrap-themes-website-templates/">Business Bootstrap Themes</a> by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                            </div>
+    					</div>
+					</div>
+				</div>
+			</div>	
+		</div>
+		</div>
+	</footer>

@@ -1,0 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<!-- jquery.min.js�@�w�n�~�|�� -->
+    <script src="<c:url value="/resources/js/jquery.min.js" /></script>	 
+    <script src="<c:url value="/resources/js/bootstrap.min.js" /></script>
+    <script src="<c:url value="/resources/js/jquery.easing.min.js" /></script>
+	<script src="<c:url value="/resources/js/wow.min.js" /></script>
+	<script src="<c:url value="/resources/js/jquery.scrollTo.js" /></script>
+	<script src="<c:url value="/resources/js/jquery.appear.js" /></script>
+	<script src="<c:url value="/resources/js/stellar.js" /></script>
+	<script src="<c:url value="/resources/js/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js" /></script>
+	<script src="<c:url value="/resources/js/owl.carousel.min.js" /></script>
+	<script src="<c:url value="/resources/js/nivo-lightbox.min.js" /></script>
+    <script src="<c:url value="/resources/js/custom.js" /></script>  

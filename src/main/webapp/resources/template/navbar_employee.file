@@ -1,0 +1,37 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+		<div class="top-area">
+			<div style="margin-left:15px;">
+				<div class="row">
+					<div class="col-sm-6 col-md-6" style="width:100%;">
+						<div style="display:inline; width:120px; padding-left:15px;"> <img src="./images/logo.jpg" style="max-width:80px; width:80px;"> </div>
+						<div style="display:inline; font-weight:bold; font-size:20px; padding-left:15px;"> 工時系統 </div>
+						<div style="display:inline; float:right; position:absolute; right:50px; text-align:right; margin-right:15px;">
+								Wellcome&emsp;<%=session.getAttribute("userNo")%> &emsp;
+								<a href="Login.jsp">登出</a> 
+								<a href="updatePassword.jsp">更改密碼</a> 	</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+        <div class="container navigation" style="margin-right:15px;">
+		
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+
+            <!-- 這是功能列的BAR -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+			  <ul class="nav navbar-nav">
+				<li class="active0"><a href="employeeMain.jsp">首頁</a></li>
+				<li class="active1"><a href="Employee.jsp">新增工時</a></li>
+				<li class="active2"><a href="FixWt.jsp">修改工時</a></li>
+				<li class="active3"><a href="employeeWorkhourQuery.jsp">查詢工時</a></li>
+			  </ul>
+            </div>
+        </div>
+    </nav>
