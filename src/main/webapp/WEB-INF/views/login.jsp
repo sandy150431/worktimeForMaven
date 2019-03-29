@@ -32,8 +32,7 @@
 									</h3>
 								</div>
 								<div class="panel-body">
-
-									<form action="./LoginServlet" method="post" class="contactForm lead">
+									<form action="login" method="post" class="contactForm lead">
 										<div class="col-xs-6 col-sm-6 col-md-6">
 											<div class="form-group">
 												<label for="userNo">帳號</label> 

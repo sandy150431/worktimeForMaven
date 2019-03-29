@@ -28,7 +28,10 @@
 	<!-- 功能表換色 -->
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<script type="text/javascript">	$(".active0").addClass("active");
-	</script><%@ include file="/resources/template/jsFile.file"%>
+	</script>
+	
+	<%@ include file="/resources/template/jsFile.file"%>
+	
 </body>
 
 </html>
