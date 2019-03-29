@@ -12,18 +12,18 @@
 	
 	
     <!-- css -->
-    <link href="<c:url value='/resources/css/bootstrap.min.css' />" rel="stylesheet" type="text/css"/>
-    <link href="<c:url value='/resources/css/font-awesome/css/font-awesome.min.css' />" rel="stylesheet" type="text/css" />
-	<link href="<c:url value='/resources/css/plugins/cubeportfolio/css/cubeportfolio.min.css' />" rel="stylesheet" type="text/css"/>
-	<link href="<c:url value='/resources/css/animate.css' />" rel="stylesheet" />
-    <link href="<c:url value='/resources/css/style.css' />" rel="stylesheet"/>
+    <link href="<c:url value='/css/bootstrap.min.css' />" rel="stylesheet" type="text/css"/>
+    <link href="<c:url value='/css/font-awesome/css/font-awesome.min.css' />" rel="stylesheet" type="text/css" />
+	<link href="<c:url value='/css/plugins/cubeportfolio/css/cubeportfolio.min.css' />" rel="stylesheet" type="text/css"/>
+	<link href="<c:url value='/css/animate.css' />" rel="stylesheet" />
+    <link href="<c:url value='/css/style.css' />" rel="stylesheet"/>
 
 	<!-- boxed bg -->
-	<link id="bodybg" href="<c:url value='/resources/css/bodybg/bg1.css' />" rel="stylesheet" type="text/css" />	
+	<link id="bodybg" href="<c:url value='/css/bodybg/bg1.css' />" rel="stylesheet" type="text/css" />	
 	<!-- template skin -->
-	<link id="t-colors" href="<c:url value='/resources/css/color/default.css' />" rel="stylesheet">
+	<link id="t-colors" href="<c:url value='/css/color/default.css' />" rel="stylesheet">
 	<!-- tablecss -->
-	<link id="t-colors" href="<c:url value='/resources/css/tablecss.css' />" rel="stylesheet">
+	<link id="t-colors" href="<c:url value='/css/tablecss.css' />" rel="stylesheet">
 	
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 </head>
