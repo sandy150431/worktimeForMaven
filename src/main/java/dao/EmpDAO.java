@@ -152,8 +152,8 @@ public class EmpDAO {
 	//新增員工資料
 	public String insEmp(Emp emp) throws Exception{
 		  conn = ConnectionHelper.getConnection();
-		  sql = "INSERT INTO EMP(EMP_NO,EMP_NAME,PW,TWID,SEX,EMAIL,FIRST_DATE,AUTHORITY,RESIGN) " +
-				  "VALUES('a' || LPAD(EMP_SEQ.NEXTVAL, 6, '0'), ?, ?, ?, ?, ?, ?, ?,0) ";
+		  sql = "INSERT INTO EMP(EMP_NAME,PW,TWID,SEX,EMAIL,FIRST_DATE,AUTHORITY,RESIGN) " +
+				  "VALUES(?, ?, ?, ?, ?, ?, ?,0) ";
 		    pstmt = conn.prepareStatement(sql);
 		  pstmt.setString(1, emp.getEmpName());
 		  pstmt.setString(2, emp.getPw());
@@ -165,7 +165,7 @@ public class EmpDAO {
 		  pstmt.executeUpdate();
 		  conn.commit();
 		  pstmt.clearParameters();
-		  sql = "SELECT EMP_SEQ.CURRVAL EMP_NO FROM DUAL ";
+		  sql = "SELECT EMP_NO FROM EMP";
 		  pstmt = conn.prepareStatement(sql);
 		  rs = pstmt.executeQuery(sql);
 		  rs.next();
@@ -173,6 +173,7 @@ public class EmpDAO {
 		 conn.close();
 		  return rs.getString("emp_no");
 		 }
+	
 	public int delEmpById(Emp emp)throws Exception {
 		// TODO Auto-generated method stub
 		conn = ConnectionHelper.getConnection();

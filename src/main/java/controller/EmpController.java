@@ -1,36 +1,31 @@
 package controller;
 
-import java.io.*;
+import java.io.IOException;
 
-import javax.servlet.*;
-import javax.servlet.http.HttpServlet;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import check.ChineseChange;
 import check.IdTest;
 import check.InputCheck;
 import check.TypeChange;
-
-import dao.*;
-import model.*;
+import dao.EmpDAO;
 import mail.NewEmpMail;
-public class EmpController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+import model.Emp;
+
+@Controller
+public class EmpController{
+
 	EmpDAO empDAO = null;
 	String empNo = null;
-
-	public EmpController() {
-		super();
-	}
-
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
-	}
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -60,7 +55,7 @@ public class EmpController extends HttpServlet {
 		} else if (ChineseChange.u2i("刪除離職註記").equals(action)) {// 修改員工
 			deleEmpResign(request, response);
 		}else if (ChineseChange.u2i("新增").equals(action)) {// 修改員工
-			insEmp(request, response);
+			//insEmp(request, response);
 		}else if (ChineseChange.u2i("刪除").equals(action)) {// 刪除員工  
 			deleEmp(request, response);
 		}
@@ -224,19 +219,22 @@ public class EmpController extends HttpServlet {
 	}
 
 	// 新增員工資料
-	private void insEmp(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping("/addEmp")
+	public String insEmp(//
+			@RequestParam(value = "empName", required = true) String empName, //
+			@RequestParam(value = "pw", required = true) String pw ,//
+			@RequestParam(value = "twid", required = true) String twid ,//
+			@RequestParam(value = "email", required = true) String email ,//
+			@RequestParam(value = "firstDate", required = true) String firstDateString ,//
+			@RequestParam(value = "authority", required = true) String authority,//
+			@RequestParam(value = "sex", required = true) String sexs) {
+		
 		// TODO Auto-generated method stub
 		JFrame jf = new JFrame();
-		String empName = ChineseChange.u2i2(request.getParameter("empName"));
-		String pw = request.getParameter("pw");
-		String twid = request.getParameter("twid");
 		boolean id ,date ,mail ;
 		id = IdTest.isValidTWPID(twid);
-		String email = request.getParameter("email");
 		mail = IdTest.isValidEmail(email);
-		String firstDateString = request.getParameter("firstDate");
 		date = IdTest.isValidDate(firstDateString);
-		String authority = request.getParameter("authority");
 		int sex = 0;
 		java.sql.Date firstDate = null;
 		
@@ -246,16 +244,10 @@ public class EmpController extends HttpServlet {
 			JOptionPane.showMessageDialog(jf, "請輸入正確的格式");
 			jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			
-			try {
-				request.getRequestDispatcher("adminAddEmp.jsp").forward(request, response);
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (ServletException se) {
-				// TODO Auto-generated catch block
-				se.printStackTrace();
-			}
+			return "admin/adminAddEmp";
+			
 		} else {
-			sex = Integer.parseInt(request.getParameter("sex"));
+			sex = Integer.parseInt(sexs);
 			firstDate = TypeChange.stringToSqlDate(firstDateString);
 			try {
 				EmpDAO empDAO = new EmpDAO();
@@ -271,19 +263,13 @@ public class EmpController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			NewEmpMail.main(null);
+			//NewEmpMail.main(null);
+			NewEmpMail.sendMail(email);
 			jf.setAlwaysOnTop(true);
 			JOptionPane.showMessageDialog(jf, "新增成功");
 			jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			
-			try {
-				request.getRequestDispatcher("adminFindEmp.jsp").forward(request, response);
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (ServletException se) {
-				// TODO Auto-generated catch block
-				se.printStackTrace();
-			}
+			return "admin/adminFindEmp";
 		}
 	}
 
