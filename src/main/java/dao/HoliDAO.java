@@ -71,7 +71,6 @@ public class HoliDAO {
 		pstmt.setInt(2, holi.getHrs());
 		pstmt.setDate(3, holi.getHoliday());
 		pstmt.executeUpdate();
-		conn.commit();
 		pstmt.close();
 		conn.close();
 	}
@@ -79,14 +78,12 @@ public class HoliDAO {
 	// 新增例假日
 	public void insertHoliday(Holi holi) throws Exception {
 		conn = ConnectionHelper.getConnection();
-		sql = "INSERT INTO Holi(HOLIDAY,HOLI_REASON,HRS) "
-				+ "VALUES(? ,? ,? ) ";
+		sql = "INSERT INTO Holi(HOLIDAY,HOLI_REASON,HRS) " + "VALUES(? ,? ,? ) ";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setDate(1, holi.getHoliday());
 		pstmt.setString(2, holi.getHoliReason());
 		pstmt.setInt(3, holi.getHrs());
 		pstmt.executeUpdate();
-		conn.commit();
 		rs.close();
 		pstmt.close();
 		conn.close();
@@ -95,12 +92,10 @@ public class HoliDAO {
 	// 刪除例假日
 	public void deleteHoliByDate(Holi holi) throws Exception {
 		conn = ConnectionHelper.getConnection();
-		sql = "DELETE FROM HOLI WHERE trunc(HOLIDAY)= trunc(?)";
+		sql = "DELETE FROM HOLI WHERE HOLIDAY = ?";
 		pstmt = conn.prepareStatement(sql);
-		// System.out.println("holi.getHoliday()="+holi.getHoliday());
 		pstmt.setDate(1, holi.getHoliday());
 		pstmt.executeUpdate();
-		conn.commit();
 		rs.close();
 		stmt.close();
 		conn.close();

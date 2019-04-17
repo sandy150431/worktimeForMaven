@@ -17,7 +17,7 @@
 			<div class="container marginbot-50">
 
 
-				<form action="./HoliController?action=search" class="contactForm lead">
+				<form action="searchHoli" method="post" class="contactForm lead">
 					<div class="section-heading text-center">
 						<h2 class="h-bold">修改例假日</h2>
 						<div class="divider-short"></div>
@@ -29,8 +29,9 @@
 								<td class="td2"><input type="text" name="holiday" id="holiday"
 									required placeholder="yyyy-mm-dd"
 									class="form-control input-md"></td>
-								<td class="td3"><input type="submit" name="action" value="查詢例假日"
-									class="btn btn-skin btn-sm" style="margin-left:20px; font-family: Microsoft JhengHei;" ></td>
+								<td class="td3">
+									<input type="submit" value="查詢例假日" class="btn btn-skin btn-sm" style="margin-left:20px; font-family: Microsoft JhengHei;" >
+								</td>
 							</tr>
 						</table>
 					</div>

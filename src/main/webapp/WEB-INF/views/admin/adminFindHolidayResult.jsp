@@ -29,23 +29,23 @@
 
 							<!-- 內容 -->
 							<div class="panel-body">
-								<form action="HoliController">
+								<form id="postForm" action="" method="post">
 
 									<div class="form-group required fontChinese">
-										<label for="empNo"
+										<label for="holiday"
 											class="control-label col-md-4  requiredField" style="font-family: Microsoft JhengHei; width:100px;">假日日期</label>
 										<div class="controls col-md-8 ">
-											<input id="empNo" type="text" name="holiday" readonly
+											<input id="holiday" name="holiday" type="text" readonly
 												class="input-md  textinput textInput form-control"
 												style="margin-bottom: 10px" type="text" required value=${holi.holiday } />
 										</div>
 									</div>
 
 									<div class="form-group required fontChinese">
-										<label for="empName"
+										<label for="holiReason"
 											class="control-label col-md-4  requiredField"  style="font-family: Microsoft JhengHei; width:100px;">假日原因</label>
 										<div class="controls col-md-8 ">
-											<input id="empName" name="holiReason" 
+											<input id="holiReason" name="holiReason" 
 												maxlength="20"
 												class="input-md  textinput textInput form-control"
 												style="margin-bottom: 10px" type="text" required value=${holi.holiReason } />
@@ -53,10 +53,10 @@
 									</div>
 
 									<div class="form-group required fontChinese">
-										<label for="twid"
+										<label for="hrs"
 											class="control-label col-md-4  requiredField"  style="font-family: Microsoft JhengHei; width:100px;">假日時數</label>
 										<div class="controls col-md-8 ">
-											<input id="twid" name="hrs" maxlength="2"
+											<input id="hrs" name="hrs" maxlength="2"
 												class="input-md  textinput textInput form-control"
 												style="margin-bottom: 10px" type="text" 
 												placeholder="請輸入1~8整數時數" required value=${holi.hrs } />
@@ -67,8 +67,8 @@
 									<div class="section-heading text-center">
 										<div style="margin-top: 30px;" class="col-lg-12">
 											<!-- name指動作；value指要做什麼動作 -->
-											<input type="submit" name="action" value="修改例假日" class="btn btn-skin btn-lg"  style="font-family: Microsoft JhengHei;">
-											<input type="submit" name="action" value="刪除例假日" class="btn btn-skin btn-lg"  style="font-family: Microsoft JhengHei;">
+											<button id="update" class="btn btn-skin btn-lg"  style="font-family: Microsoft JhengHei;">修改例假日</button>
+											<button id="delete" class="btn btn-skin btn-lg"  style="font-family: Microsoft JhengHei;">刪除例假日</button>
 
 											<!-- button純粹轉址 -->
 											<input type ="button" onclick="javascript:location.href='adminFindHoliday.jsp'" value="重新查詢" class="btn btn-skin btn-lg"  style="font-family: Microsoft JhengHei;">
@@ -100,9 +100,23 @@
 	<!-- Core JavaScript Files -->
 	<!-- 功能表換色 -->
 	<script type="text/javascript"
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
+	</script>
 	<script type="text/javascript">
+	$(function () {
+		var form =$("#postForm");
+		var action = form.attr('action');
 		$(".active1").addClass("active");
+		
+		$("#update").click(function(){
+			form.attr('action', 'updateHolidayByHoli');
+			form.submit();			
+		})
+		$("#delete").click(function(){
+			form.attr('action', 'deleteHolidayByHoli');
+			form.submit();		
+		})
+	})
 	</script>
 	<!--<script src="js/inputAlernt.js"></script>-->
 
