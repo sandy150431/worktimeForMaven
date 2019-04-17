@@ -47,8 +47,6 @@
 												<div class="validation"></div>
 											</div>
 										</div>
-
-
 										<div class="col-xs-6 col-sm-6 col-md-6">
 											<div class="form-group">
 												<input type="submit" value="登入" class="btn btn-skin btn-block btn-lg">

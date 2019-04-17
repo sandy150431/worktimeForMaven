@@ -30,12 +30,12 @@
             <!-- 這是功能列的BAR -->
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
 			  <ul class="nav navbar-nav">
-				<li class="active0"><a href="adminMain.jsp">首頁</a></li>
-				<li class="active1"><a href="adminFindHoliday.jsp">修改假日</a></li>
-				<li class="active2"><a href="adminAddHoliday.jsp">新增年度例假日</a></li>
-				<li class="active3"><a href="adminFindEmp.jsp">查詢與修改員工資料</a></li>
-				<li class="active4"><a href="adminResignFind.jsp">離職註記</a></li>
-				<li class="active5"><a href="adminAddEmp.jsp">新增員工</a></li>
+				<li class="active0"><a href="<c:url value='/adminMain' />">首頁</a></li>
+				<li class="active1"><a href="<c:url value='/findHoliday' />">修改假日</a></li>
+				<li class="active2"><a href="<c:url value='/addHolidayMain' />">新增年度例假日</a></li>
+				<li class="active3"><a href="<c:url value='/findEmp' />">查詢與修改員工資料</a></li>
+				<li class="active4"><a href="<c:url value='/resignMain' />">離職註記</a></li>
+				<li class="active5"><a href="<c:url value='/addEmpMain' />">新增員工</a></li>
 			  </ul>
             </div>
         </div>

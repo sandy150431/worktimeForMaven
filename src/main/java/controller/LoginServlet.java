@@ -23,13 +23,6 @@ public class LoginServlet {
 		return "login";
 	}
 	
-	@RequestMapping(path = "/login", method = RequestMethod.GET)
-	protected void doGet(//
-			@RequestParam(value = "userNo", required = true) String userNo, //
-			@RequestParam(value = "password", required = true) String password) {
-		doPost(userNo, password);
-	}
-
 	@RequestMapping(path = "/login", method = RequestMethod.POST)
 	protected String doPost(//
 			@RequestParam(value = "userNo", required = true) String userNo, //
