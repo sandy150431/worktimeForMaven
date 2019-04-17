@@ -12,7 +12,7 @@
 
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
-<form action="EmpController">
+<form action="addEmp" method="post" >
 	<div id="wrapper">
 		<%@ include file="/resources/template/navbar_admin.file"%>
 
@@ -135,7 +135,7 @@
 
 
 
-								
+
 							</div>
 							<!-- 內容結束 -->
 
