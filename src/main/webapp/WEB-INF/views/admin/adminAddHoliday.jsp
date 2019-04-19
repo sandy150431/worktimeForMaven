@@ -18,7 +18,7 @@
 			<div class="container marginbot-50">
 
 
-				<form action="./HoliController" class="contactForm lead">
+				<form action="addYearHoliday" method="post" class="contactForm lead">
 					<div class="section-heading text-center">
 						<h2 class="h-bold">新增年度假日</h2>
 						<div class="divider-short"></div>
@@ -27,10 +27,10 @@
 							<tr>
 								<td class="td1"><label for="year">請輸入年份        </label></td>
 								<td class="td2">
-									<input type="text" name="holiday" id="year" 
+									<input type="text" name="year" id="year" 
 									placeholder="yyyy" required class="form-control input-md"></td>
 								<td class="td4">
-									<input type="submit" name="action" value="新增年度例假日" class="btn btn-skin btn-sm" style="font-family: Microsoft JhengHei;"></td>
+									<input type="submit" value="新增年度例假日" class="btn btn-skin btn-sm" style="font-family: Microsoft JhengHei;"></td>
 							</tr>
 						</table>
 						

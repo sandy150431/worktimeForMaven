@@ -8,49 +8,51 @@
 	src="https://code.jquery.com/jquery-latest.pack.js"></script>
 <%@ include file="/resources/template/head.file"%>
 <script>
+	
 </script>
 
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
-<form action="insertHoliday" method="post">
-	<div id="wrapper">
-		<%@ include file="/resources/template/navbar_admin.file"%>
+	<form action="insertHoliday" method="post">
+		<div id="wrapper">
+			<%@ include file="/resources/template/navbar_admin.file"%>
 
 
-		<!-- Section: team -->
-		<section id="doctor" class="home-section bg-gray paddingbot-60">
-			<div class="container marginbot-50">
-				
-				<!-- 表格 -->
-				<div class="container">
+			<!-- Section: team -->
+			<section id="doctor" class="home-section bg-gray paddingbot-60">
+				<div class="container marginbot-50">
 
-					<div
-						class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-						<div class="panel panel-info" style="border-color: white;">
+					<!-- 表格 -->
+					<div class="container">
 
-							<!-- 標題 -->
-							<div class="section-heading text-center">
-								<h2 class="h-bold">新增假日</h2>
-							<div class="divider-short"></div>
-							</div>
-			
+						<div
+							class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+							<div class="panel panel-info" style="border-color: white;">
 
-							<div class="panel-body">
+								<!-- 標題 -->
+								<div class="section-heading text-center">
+									<h2 class="h-bold">新增假日</h2>
+									<div class="divider-short"></div>
+								</div>
 
-								<!-- 內容 -->
+
+								<div class="panel-body">
+
+									<!-- 內容 -->
 
 									<div class="form-group required fontChinese">
-										<label for="holiday" class="control-label col-md-4  requiredField">假日日期</label>
+										<label for="holiday"
+											class="control-label col-md-4  requiredField">假日日期</label>
 										<div class="controls col-md-8 ">
-											<input id="holiday" name="holiday" 
-												placeholder="yyyy-mm-dd" 
+											<input id="holiday" name="holiday" value= ${holiday }
 												class="input-md  textinput textInput form-control"
-												style="margin-bottom: 10px" type="text"  required />
+												style="margin-bottom: 10px" type="text" readonly />
 										</div>
 									</div>
 
 									<div class="form-group required fontChinese">
-										<label for="holiReason" class="control-label col-md-4  requiredField">假日原因</label>
+										<label for="holiReason"
+											class="control-label col-md-4  requiredField">假日原因</label>
 										<div class="controls col-md-8 ">
 											<input id="holiReason" name="holiReason" maxlength="30"
 												class="input-md  textinput textInput form-control"
@@ -63,41 +65,46 @@
 										<div class="controls col-md-8 ">
 											<input id="hrs" name="hrs" maxlength="30"
 												class="input-md  textinput textInput form-control"
-												style="margin-bottom: 10px" type="text" placeholder="請輸入1~8整數時數" required />
+												style="margin-bottom: 10px" type="text"
+												placeholder="請輸入1~8整數時數" required />
 										</div>
 									</div>
 
 									<div class="section-heading text-center">
 										<div style="margin-top: 30px;" class="col-lg-12">
-											<input type="submit" value="新增例假日" class="btn btn-skin btn-lg" style="font-family: Microsoft JhengHei;">
+											<input type="submit" value="新增例假日"
+												class="btn btn-skin btn-lg"
+												style="font-family: Microsoft JhengHei;">
 										</div>
 									</div>
 
-							</div>
-							<!-- 內容結束 -->
+								</div>
+								<!-- 內容結束 -->
 
+							</div>
 						</div>
 					</div>
+					<!-- 表格結束 -->
+
+
 				</div>
-				<!-- 表格結束 -->
-
-
-			</div>
-		</section>
-		<!-- /Section: team -->
+			</section>
+			<!-- /Section: team -->
 
 
 
-		<%@ include file="/resources/template/footer.file"%>
-	</div>
+			<%@ include file="/resources/template/footer.file"%>
+		</div>
 
-	<!-- Core JavaScript Files -->
-	<!-- 功能表換色 -->
-	<script type="text/javascript"
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script type="text/javascript">	$(".active5").addClass("active");</script>
-	<!--<script src="js/inputAlernt.js"></script>-->
-	
+		<!-- Core JavaScript Files -->
+		<!-- 功能表換色 -->
+		<script type="text/javascript"
+			src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script type="text/javascript">
+			$(".active5").addClass("active");
+		</script>
+		<!--<script src="js/inputAlernt.js"></script>-->
+
 	</form>
 </body>
 </html>

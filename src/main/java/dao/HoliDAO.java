@@ -121,9 +121,9 @@ public class HoliDAO {
 					pstmt = conn.prepareStatement(Sql);
 					pstmt.setDate(1, date);
 					pstmt.executeUpdate();
-					conn.commit();
-//					pstmt.close();
-//					conn.close();
+					// conn.commit();
+					// pstmt.close();
+					// conn.close();
 				}
 			}
 		}
@@ -132,15 +132,15 @@ public class HoliDAO {
 
 	public List<java.sql.Date> dateSplit(java.sql.Date start, java.sql.Date end) throws Exception {
 		Long spi = end.getTime() - start.getTime();
-		Long step = spi / (24 * 60 * 60 * 1000);// 相隔天数		
+		Long step = spi / (24 * 60 * 60 * 1000);// 相隔天数
 		List<java.sql.Date> dateList = new ArrayList<java.sql.Date>();
 		dateList.add(end);
 		for (int i = 1; i <= step; i++) {
 			java.sql.Date addDate = new java.sql.Date(dateList.get(i - 1).getTime() - (24 * 60 * 60 * 1000));
-				dateList.add(addDate);// 比上一天减一
-			}
+			dateList.add(addDate);// 比上一天减一
+		}
 
-//		conn.close();
+		// conn.close();
 		return dateList;
 	}
 
@@ -150,12 +150,12 @@ public class HoliDAO {
 		// h.setHoliday(TypeChange.stringToSqlDate("2017-01-05"));
 		// deleteHoliByDate(h);
 	}
-	
-	//確認年度例假日是否已產生
+
+	// 確認年度例假日是否已產生
 	public String findHoliByYear(String yearInput) throws Exception {
-		String wrongReturn = null; 
+		String wrongReturn = null;
 		conn = ConnectionHelper.getConnection();
-		sql =sql + " where HOLIDAY = to_date(?, 'yyyy') ";
+		sql = sql + " where HOLIDAY = to_date(?, 'yyyy') ";
 		pstmt = conn.prepareStatement(sql);// 叫sql建立一個單筆查詢的表
 		pstmt.setString(1, yearInput);// 把變數組合起來送進pstm因為sql是從1開始所以注意要前面填1，1指?，有幾個?就有多少數字
 		rs = pstmt.executeQuery();// executeQuery()代表sql執行指令
@@ -167,13 +167,13 @@ public class HoliDAO {
 			holi.setHoliReason(rs.getString("HOLI_REASON"));
 			holi.setHrs(rs.getInt("HRS"));
 		}
-		if(InputCheck.isNull(holi)==false){
+		if (InputCheck.isNull(holi) == false) {
 			wrongReturn = "年度假日已經新增";
 		}
 		conn.close();
 		return wrongReturn;
 	}
-	
+
 	// 把變數還回去
 	public void close() throws Exception {
 		rs.close();
