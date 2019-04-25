@@ -108,7 +108,7 @@ public class EmpDAO {
 		pstmt.setString(6, emp.getAuthority());
 		pstmt.setString(7, emp.getEmpNo());
 		pstmt.executeUpdate();
-		conn.commit();
+		//conn.commit();
 		pstmt.close();
 		conn.close();
 	}
@@ -144,7 +144,7 @@ public class EmpDAO {
 		pstmt.setString(3, emp.getEmpNo());
 		pstmt.executeUpdate();
 
-		conn.commit();
+		//conn.commit();
 		pstmt.close();
 		conn.close();
 	}
@@ -163,7 +163,7 @@ public class EmpDAO {
 		  pstmt.setDate(6, emp.getFirstDate());
 		  pstmt.setString(7, emp.getAuthority());
 		  pstmt.executeUpdate();
-		  conn.commit();
+		  //conn.commit();
 		  pstmt.clearParameters();
 		  sql = "SELECT EMP_NO FROM EMP";
 		  pstmt = conn.prepareStatement(sql);
@@ -174,14 +174,13 @@ public class EmpDAO {
 		  return rs.getString("emp_no");
 		 }
 	
-	public int delEmpById(Emp emp)throws Exception {
+	public int delEmpById(String empNo)throws Exception {
 		// TODO Auto-generated method stub
 		conn = ConnectionHelper.getConnection();
 		sql = "DELETE FROM  EMP WHERE EMP_NO = ? ";
 		pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, emp.getEmpNo());
+		pstmt.setString(1, empNo);
 		int cnt = pstmt.executeUpdate();
-		conn.commit();
 		conn.close();
 		return cnt;
 	}
@@ -192,7 +191,7 @@ public class EmpDAO {
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, emp.getEmpNo());
 		int cnt = pstmt.executeUpdate();
-		conn.commit();
+		//conn.commit();
 		conn.close();
 		return cnt;
 	}

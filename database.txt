@@ -1,0 +1,81 @@
+--­員工資料庫
+CREATE TABLE EMP (
+	emp_no int(7) zerofill not null auto_increment, 
+	emp_name varchar(20) NOT NULL ,
+	pw varchar(20) NOT NULL ,
+	twid char(10) NOT NULL ,
+	sex int(1) NOT NULL ,
+	email varchar(50) NOT NULL ,
+	first_date date NOT NULL ,
+	authority varchar(8) NOT NULL ,
+	resign int(1),
+	resign_date date,
+	PRIMARY KEY (emp_no)
+);
+
+--Admin Insert
+INSERT INTO EMP (emp_name, pw, twid, sex, email, first_date, authority, resign, resign_date)
+VALUES ('Sandy', '0', 'A174164981', 1, 'sandy150431@gmail.com', '1988-01-13', 'Admin', 2, NULL);
+
+---------------------------------------------------------------------------------
+--假日資料庫
+CREATE TABLE HOLI (
+holiday date NOT NULL PRIMARY KEY ,
+holi_reason varchar(50) ,
+hrs int(1)
+);
+
+--------------------------------------------------------------------------------
+--工時資料庫
+create table workhours(
+  emp_no int(7) zerofill not null auto_increment,
+  emp_name varchar(20) NOT NULL ,
+  we varchar(40) NOT NULL,
+  dd date NOT NULL,
+  pro_code char(6) not null,
+  pro_name varchar(20) not null,
+  whr int(10) not null,
+  cont varchar(20) not null,
+  ot int(10),
+  otCont varchar(20),
+  reject_reason varchar(200) ,
+  stat varchar(20) NOT NULL ,
+  Hurry int(1),
+  PRIMARY KEY(EMP_NO),
+  FOREIGN KEY (`emp_no`) REFERENCES `EMP`(`emp_no`));
+
+  ALTER TABLE workhours ADD FOREIGN KEY (emp_no) REFERENCES EMP (emp_no);
+
+--------------------------------------------------------------------------------
+
+
+--專案資料庫
+CREATE TABLE PRO (
+	pro_code char(6) NOT NULL PRIMARY KEY ,
+	pro_name varchar(80) NOT NULL
+);
+INSERT INTO pro ( pro_code, pro_name)
+VALUES ('b12345', 'WorkTimeSystem' );
+select * from pro;
+
+CREATE SEQUENCE PRO_SEQ
+   INCREMENT BY 1
+     START WITH 1
+     NOMAXVALUE
+        NOCYCLE
+        NOCACHE;
+
+
+--------------------------------------------------------------------------------
+資料庫設定(context.xml)
+<Resource name="jdbc/g1_ds" auth="Container" type="javax.sql.DataSource"
+    driverClassName="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://localhost:3306/worktime_db?serverTimezone=Asia/Taipei"
+    username="root" password="zxcvbnm" maxActive="20" maxIdle="10" maxWait="-1" />
+
+資料庫設定(web.xml)
+<resource-ref>
+	<description>Mysql Sample</description>
+	<res-ref-name>jdbc/g1_ds</res-ref-name>
+	<res-type>javax.sql.DataSource</res-type>
+	<res-auth>Container</res-auth>
+</resource-ref>
