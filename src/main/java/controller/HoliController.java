@@ -30,25 +30,11 @@ public class HoliController {
 		return "admin/adminAddHoliday";
 	}
 
-	@RequestMapping("/resignMain")
-	public String resignMain() {
-		return "admin/adminResign";
-	}
-
-	@RequestMapping("/addEmpMain")
-	public String addEmpMain() {
-		return "admin/adminAddEmp";
-	}
-
 	@RequestMapping("/findHoliday")
 	public String findHoliday() {
 		return "admin/adminFindHoliday";
 	}
 
-	@RequestMapping("/findEmp")
-	public String findEmp() {
-		return "admin/adminFindEmp";
-	}
 
 	// 新增例假日
 	@RequestMapping("/insertHoliday")

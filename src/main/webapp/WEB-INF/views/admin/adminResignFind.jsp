@@ -18,7 +18,7 @@
 			<div class="container marginbot-50">
 
 
-				<form action="./EmpController?action=list" class="contactForm lead">
+				<form action="displayEmpResign" method="post" class="contactForm lead">
 					<div class="section-heading text-center">
 						<h2 class="h-bold">離職員工註記</h2>
 						<div class="divider-short"></div>
@@ -33,7 +33,7 @@
 									required
 									class="form-control input-md"></td>
 								<td class="td3">
-									<input type="submit" name="action" value="離職查詢"
+									<input type="submit" value="離職查詢"
 									class="btn btn-skin btn-sm" style="margin-left:20px;"></td>
 							</tr>
 						</table>
@@ -63,6 +63,8 @@
 			<%
 			    for(int i = 0; i<emps.size();i++){
 			     emp = emps.get(i);
+			     String sign = emp.getResign() == 0 ? "否": "是";
+			     request.setAttribute("sign",sign);
 			     request.setAttribute("emp", emp);
 			%>
 
@@ -70,7 +72,7 @@
 							<tr>
 								<td>${emp.empNo}</td>
 								<td>${emp.empName}</td>
-								<td>${emp.resign}</td>
+								<td>${sign}</td>
 								<td>${emp.resignDate}</td>
 							</tr>
 			<%

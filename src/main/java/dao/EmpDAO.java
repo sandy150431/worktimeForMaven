@@ -184,12 +184,12 @@ public class EmpDAO {
 		conn.close();
 		return cnt;
 	}
-	public int delResignById(Emp emp)throws Exception {
+	public int delResignById(String empNo)throws Exception {
 		// TODO Auto-generated method stub
 		conn = ConnectionHelper.getConnection();
 		sql = "update emp set resign = 0,resign_date = null   where emp_no = ? ";
 		pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, emp.getEmpNo());
+		pstmt.setString(1, empNo);
 		int cnt = pstmt.executeUpdate();
 		//conn.commit();
 		conn.close();
