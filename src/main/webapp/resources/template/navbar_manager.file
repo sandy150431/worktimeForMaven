@@ -9,7 +9,7 @@
 						<div style="display:inline; font-weight:bold; font-size:20px; padding-left:15px;"> 工時系統 </div>
 						<div style="display:inline; float:right; position:absolute; right:50px; text-align:right; margin-right:15px;">
 								Wellcome Manager! &emsp; 
-								<a href="Login.jsp">登出</a> 
+								<a href="<c:url value='/main' />">登出</a>  
 								<a href="updatePassword.jsp">更改密碼</a> 	</div>
 					</div>
 				</div>
@@ -28,12 +28,12 @@
             <!-- 這是功能列的BAR -->
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
 			  <ul class="nav navbar-nav">
-				<li class="active0"><a href="managerMain.jsp" >首頁</a></li>
-				<li class="active1"><a href="managerReview.jsp" >審核工時</a></li>
-				<li class="active2"><a href="managerHurryWt.jsp" >催繳工時</a></li>
-				<li class="active3"><a href="managerQuery.jsp" >查詢工時</a></li>
-				<li class="active4"><a href="managerAddPro.jsp" >新增專案</a></li>
-				<li class="active5"><a href="managerProSearch1.jsp" >查詢專案</a></li>
+				<li class="active0"><a href="<c:url value='/managerMain' />"		>首頁		</a></li> 
+				<li class="active1"><a href="<c:url value='/managerReview' />"		>審核工時	</a></li> 
+				<li class="active2"><a href="<c:url value='/managerHurryWt' />" 	>催繳工時	</a></li> 
+				<li class="active3"><a href="<c:url value='/managerQuery' />"		>查詢工時	</a></li> 
+				<li class="active4"><a href="<c:url value='/managerAddPro' />"		>新增專案	</a></li> 
+				<li class="active5"><a href="<c:url value='/managerProSearch1' />"	>查詢專案	</a></li> 
 			  </ul>
             </div>
         </div>

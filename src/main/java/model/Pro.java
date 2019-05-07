@@ -15,28 +15,28 @@ public class Pro implements Serializable {
 
 	@Id
 	@Column(name="PRO_CODE")
-	private static String proCode;
+	private String proCode;
 
 	@Column(name="PRO_NAME")
-	private static String proName;
+	private String proName;
 
 	public Pro() {
 	}
 
-	public static String getProCode() {
+	public String getProCode() {
 		return proCode;
 	}
 
 	public void setProCode(String proCode) {
-		Pro.proCode = proCode;
+		this.proCode = proCode;
 	}
 
-	public static String getProName() {
+	public String getProName() {
 		return proName;
 	}
 
 	public void setProName(String proName) {
-		Pro.proName = proName;
+		this.proName = proName;
 	}
 
 }

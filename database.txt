@@ -28,42 +28,40 @@ hrs int(1)
 --------------------------------------------------------------------------------
 --工時資料庫
 create table workhours(
-  emp_no int(7) zerofill not null auto_increment,
-  emp_name varchar(20) NOT NULL ,
-  we varchar(40) NOT NULL,
-  dd date NOT NULL,
-  pro_code char(6) not null,
-  pro_name varchar(20) not null,
-  whr int(10) not null,
-  cont varchar(20) not null,
-  ot int(10),
-  otCont varchar(20),
+  emp_no   		int(7)          zerofill not null,
+  we       		varchar(40) 	NOT NULL,
+  dd       		date 			NOT NULL,
+  pro_code 		char(6) 		not null,
+  pro_name 		varchar(20) 	not null,
+  whr      		int(10) 		not null,
+  cont     		varchar(20) 	not null,
+  ot       		int(10),
+  otCont   		varchar(20),
   reject_reason varchar(200) ,
-  stat varchar(20) NOT NULL ,
-  Hurry int(1),
-  PRIMARY KEY(EMP_NO),
-  FOREIGN KEY (`emp_no`) REFERENCES `EMP`(`emp_no`));
+  stat 			varchar(20) 	NOT NULL ,
+  hurry 		int(1),
+  PRIMARY KEY(emp_no,dd,pro_code),
+  FOREIGN KEY (`emp_no`) REFERENCES `EMP`(`emp_no`),
+  FOREIGN KEY (`pro_code`) REFERENCES `PRO`(`pro_code`)
+);
 
-  ALTER TABLE workhours ADD FOREIGN KEY (emp_no) REFERENCES EMP (emp_no);
+
 
 --------------------------------------------------------------------------------
 
 
 --專案資料庫
 CREATE TABLE PRO (
-	pro_code char(6) NOT NULL PRIMARY KEY ,
-	pro_name varchar(80) NOT NULL
+	pro_code char(6) not null,
+	pro_name varchar(80) NOT NULL,
+	PRIMARY KEY(pro_code)
 );
-INSERT INTO pro ( pro_code, pro_name)
-VALUES ('b12345', 'WorkTimeSystem' );
-select * from pro;
 
-CREATE SEQUENCE PRO_SEQ
-   INCREMENT BY 1
-     START WITH 1
-     NOMAXVALUE
-        NOCYCLE
-        NOCACHE;
+INSERT INTO pro ( pro_code, pro_name)
+VALUES ('100000', 'WorkTimeSystem' );
+
+INSERT INTO workhours(emp_no, we, dd, Pro_code, Pro_name, Whr, Cont, Ot, OtCont, reject_reason, stat, Hurry)
+VALUES ('0000002','22', to_date('2017-06-04', 'yyyy-mm-dd'), 'ATX009', 'todayIsSunday', 0, 'controller', 0, null, null, '2', 0);
 
 
 --------------------------------------------------------------------------------

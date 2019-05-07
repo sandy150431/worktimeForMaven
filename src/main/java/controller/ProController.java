@@ -1,20 +1,20 @@
 package controller;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import check.ChineseChange;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import dao.ProDAO;
 import model.Pro;
 
 //Servlet implementation class DepartmentController
-
+@Controller
 public class ProController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	String proCode = null;
@@ -25,69 +25,73 @@ public class ProController extends HttpServlet {
 		super();
 	}
 
-	// @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	// response)
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+	@RequestMapping("/managerAddPro")
+	public String managerAddPro() {
+		return "manager/managerAddPro";
 	}
 
-	// @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	// response)
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	@RequestMapping("/insPro")
+	private String insPro(//
+			@RequestParam(value = "proCode", required = true) String proCode, //
+			@RequestParam(value = "proName", required = true) String proName, //
+			Model model) {
 
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		response.setCharacterEncoding("UTF-8");
-		String action = request.getParameter("action");
-		proCode = request.getParameter("proCode");
-		if (action.equals(ChineseChange.u2i("新增專案"))) {
-			insPro(request, response);
-		}
-	}
-
-	private void insPro(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		String proName = request.getParameter("proName");
 		JFrame jf = new JFrame();
-		
-		if (proName == null || proName.equals("")) {
-			
-			jf.setAlwaysOnTop(true);
-			JOptionPane.showMessageDialog(jf, "請輸入專案名稱");
-			jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			
+		String returnPath = "manager/managerAddPro";
+
+		String check = checkPro(proCode, proName);
+
+		if (StringUtils.isEmpty(check)) {
 			try {
-				request.getRequestDispatcher("managerAddPro.jsp").forward(request, response);
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (ServletException se) {
-				// TODO Auto-generated catch block
-				se.printStackTrace();
-			}
-		} else {
-			try {
-				ProDAO ProDAO = new ProDAO();
+				ProDAO proDAO = new ProDAO();
 				Pro pro = new Pro();
+				pro.setProCode(proCode);
 				pro.setProName(proName);
-				proCode = ProDAO.insProById(pro);
+				proDAO.insertPro(pro);
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 			jf.setAlwaysOnTop(true);
 			JOptionPane.showMessageDialog(jf, "新增成功");
 			jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			
-			try {
-				request.getRequestDispatcher("managerAddPro.jsp").forward(request, response);
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (ServletException se) {
-				// TODO Auto-generated catch block
-				se.printStackTrace();
-			}
+
+		} else {
+			jf.setAlwaysOnTop(true);
+			JOptionPane.showMessageDialog(jf, check);
+			jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		}
+
+		return returnPath;
+	}
+
+	private String checkPro(String proCode, String proName) {
+
+		StringBuilder check = new StringBuilder();
+		ProDAO proDAO = new ProDAO();
+		try {
+
+			if (StringUtils.isEmpty(proCode)) {
+				check.append("請輸入專案編號\n");
+			} else {
+				
+				if (!proCode.matches("^[A-Z]{2}[0-9]{4}")) {
+					check.append("請輸入正確的專案編號，例如:[AB1234]\n");
+				}
+				if (!StringUtils.isEmpty(proDAO.findProByCode(proCode).getProCode())) {
+					check.append("此專案編號已存在\n");
+				}
+			}
+			
+			if (StringUtils.isEmpty(proName)) {
+				check.append("請輸入專案名稱\n");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return check.toString();
 	}
 }
