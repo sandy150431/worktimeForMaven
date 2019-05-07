@@ -9,39 +9,33 @@ import javax.servlet.http.HttpServletResponse;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import model.Workhours;
 
 import check.TypeChange;
 import dao.NWTDAO;
 
-/**
- * Servlet implementation class NWTServlet
- */
+@Controller
 public class NWTServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public NWTServlet() {
 		super();
-		// TODO Auto-generated constructor stub
+	}
+	
+	@RequestMapping("/fixWt")
+	public String fixWt(){
+		return "employ/fixWt";
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doPost(req, res);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub

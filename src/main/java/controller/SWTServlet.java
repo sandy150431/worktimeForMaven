@@ -8,40 +8,31 @@ import javax.servlet.http.HttpServletResponse;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import check.TypeChange;
 import dao.SWTDAO;
 import model.Workhours;
 
-/**
- * Servlet implementation class SWTServlet
- */
+@Controller
 public class SWTServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public SWTServlet() {
 		super();
-		// TODO Auto-generated constructor stub
+	}
+	
+	@RequestMapping("/employee")
+	public String employee(){
+		return "employ/employee";
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-
 		doPost(req, res);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		req.setCharacterEncoding("UTF-8");
 		res.setContentType("text/html ; charset=UTF-8");
 
