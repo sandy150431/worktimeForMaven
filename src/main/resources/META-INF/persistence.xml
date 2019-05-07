@@ -6,7 +6,6 @@
 		<class>model.Pro</class>
 		<class>model.Workhours</class>
 		<class>model.WorkhourPK</class>
-		<class>model.VWorkhourA</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/worktimedb?serverTimezone=CST"/>
 			<property name="javax.persistence.jdbc.user" value="root"/>

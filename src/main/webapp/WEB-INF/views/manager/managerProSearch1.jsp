@@ -41,23 +41,23 @@
 				<div class="wrapper">
 					<%
 						VWorkhourADAO vWorkhourADAO = new VWorkhourADAO();
-													List<VWorkhourA> vWorkhourAs = vWorkhourADAO.findAllWorkhour();
-													VWorkhourA vWorkhourA = null;
+						List<Workhours> workhourA = vWorkhourADAO.findAllWorkhour();
+						Workhours workhour = null;
 					%>
 					<table id="acrylic">
 						<thead>
 							<tr>
 								<th>專案代碼</th>
 								<th>專案名稱</th>
-								<th>日期</th>
-								<th>每月總工作時數</th>
+								<th>總工作時數</th>
+								<th>總加班時數</th>
 							</tr>
 						</thead>
 
 						<%
-							for(int i = 0; i<vWorkhourAs.size(); i++){
-																	vWorkhourA = vWorkhourAs.get(i);
-																	request.setAttribute("vWorkhourA", vWorkhourA);
+							for(int i = 0; i<workhourA.size(); i++){
+								workhour = workhourA.get(i);
+								request.setAttribute("vWorkhourA", workhour);
 						%>
 
 						<tbody>

@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import java.util.List;
 
 import model.Workhours;
@@ -19,6 +23,7 @@ import dao.ExcelDAO;
 import dao.ManagerQueryDAO;
 import dao.ManagerReviewDAO;
 
+@Controller
 public class ManagerController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	ManagerQueryDAO mqDAO = null;
@@ -29,6 +34,22 @@ public class ManagerController extends HttpServlet {
 		super();
 	}
 
+	@RequestMapping("/managerMain")
+	public String managerMain(){
+		return "manager/managerMain";
+	}
+	
+	@RequestMapping("/managerReview")
+	public String managerReview(){
+		return "manager/managerReview";
+	}
+	
+	@RequestMapping("/managerQuery")
+	public String managerQuery(){
+		return "manager/managerQuery";
+	}
+	
+	
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);

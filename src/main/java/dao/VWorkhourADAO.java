@@ -1,4 +1,5 @@
 package dao;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,69 +12,61 @@ public class VWorkhourADAO {
 	Statement stmt = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
-	VWorkhourA vWorkhourA = null;
-	List<VWorkhourA> vWorkhourAs = new ArrayList<VWorkhourA>();
-	List<VWorkhourA> vWorkhourAe = new ArrayList<VWorkhourA>();
+	// VWorkhourA vWorkhourA = null;
+	// List<VWorkhourA> vWorkhourAs = new ArrayList<VWorkhourA>();
+	// List<VWorkhourA> vWorkhourAe = new ArrayList<VWorkhourA>();
+	//
+	// public List<VWorkhourA> findAllWorkhoure(String proCode) throws Exception {
+	// conn = ConnectionHelper.getConnection();
+	// // stmt = conn.createStatement();
+	// sql = " SELECT PRO_CODE, PRO_NAME, YYYYMM, CCC from V_WORKHOUR_A where
+	// PRO_CODE=? ";
+	// pstmt = conn.prepareStatement(sql);
+	// pstmt.setString(1, proCode);
+	// rs = pstmt.executeQuery();
+	// while (rs.next()) {
+	// vWorkhourA = new VWorkhourA();
+	// vWorkhourA.setProCode(rs.getString("PRO_CODE"));
+	// vWorkhourA.setProName(rs.getString("PRO_NAME"));
+	// vWorkhourA.setYyyymm(rs.getString("YYYYMM"));
+	// vWorkhourA.setCcc(rs.getInt("CCC"));
+	// vWorkhourAe.add(vWorkhourA);
+	// // System.out.println("size=" + vWorkhourAe.size());
+	// }
+	//
+	// conn.close();
+	// return vWorkhourAe;
+	// }
 
-	public List<VWorkhourA> findAllWorkhoure(String proCode) throws Exception {
-		conn = ConnectionHelper.getConnection();
-		//stmt = conn.createStatement();
-		sql = " SELECT PRO_CODE, PRO_NAME, YYYYMM, CCC from V_WORKHOUR_A where PRO_CODE=? ";
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, proCode);
-		rs = pstmt.executeQuery();
-		while (rs.next()) {
-			vWorkhourA = new VWorkhourA();
-			vWorkhourA.setProCode(rs.getString("PRO_CODE"));
-			vWorkhourA.setProName(rs.getString("PRO_NAME"));
-			vWorkhourA.setYyyymm(rs.getString("YYYYMM"));
-			vWorkhourA.setCcc(rs.getInt("CCC"));
-			vWorkhourAe.add(vWorkhourA);
-			//System.out.println("size=" + vWorkhourAe.size());
+	public List<Workhours> findAllWorkhour() {
+
+		List<Workhours> list = new ArrayList<Workhours>();
+		try {
+			conn = ConnectionHelper.getConnection();
+			stmt = conn.createStatement();
+			sql = " select pro_code, pro_name,dd, sum(ot+whr) sumWhr from workhours group by pro_code , pro_name , dd ";
+			// System.out.println(sql);
+			pstmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery(sql);
+
+			while (rs.next()) {
+				Workhours workhours = new Workhours();
+				workhours.setProCode(rs.getString("PRO_CODE"));
+				workhours.setProName(rs.getString("PRO_NAME"));
+				workhours.setDd(rs.getDate("DD"));
+				workhours.setWhr(rs.getInt("sumWhr"));
+				list.add(workhours);
+			}
+
+			conn.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
-		conn.close();
-		return vWorkhourAe;
+		return list;
 	}
-	
-	public List<VWorkhourA> findAllWorkhour() throws Exception {
-		conn = ConnectionHelper.getConnection();
-		stmt = conn.createStatement();
-		sql = " SELECT PRO_CODE,PRO_NAME,YYYYMM,CCC from V_WORKHOUR_A ";
-		//System.out.println(sql);
-		pstmt = conn.prepareStatement(sql);
-		rs = stmt.executeQuery(sql);
-		while (rs.next()) {
-			vWorkhourA = new VWorkhourA();
-			vWorkhourA.setProCode(rs.getString("PRO_CODE"));
-			vWorkhourA.setProName(rs.getString("PRO_NAME"));
-			vWorkhourA.setYyyymm(rs.getString("YYYYMM"));
-			vWorkhourA.setCcc(rs.getInt("CCC"));
-			vWorkhourAs.add(vWorkhourA);
-			//System.out.println("size=" + vWorkhourAs.size());
-		}
-		conn.close();
-		return vWorkhourAs;
-	}
-//	public VWorkhourA findWorkhourByProCode(String proCode) throws Exception {
-//		// 把變數填進東西
-//		conn = ConnectionHelper.getConnection();
-//		sql = " SELECT PRO_CODE,PRO_NAME,YYYYMM,CCC from V_WORKHOUR_A where PRO_CODE = ? ";
-//		pstmt = conn.prepareStatement(sql);// 叫sql建立一個單筆查詢的表
-//		pstmt.setString(1, proCode);
-//		rs = pstmt.executeQuery();
-//
-//		// sql有查詢結果，才執行
-//		if (rs.next()) {
-//			vWorkhourA = new VWorkhourA(); 
-//			vWorkhourA.setProCode(rs.getString("PRO_CODE"));
-//			vWorkhourA.setProName(rs.getString("PRO_NAME"));
-//			vWorkhourA.setYyyymm(rs.getString("YYYYMM"));
-//			vWorkhourA.setCcc(rs.getInt("CCC"));
-//		}
-//		return vWorkhourA;// 回傳結果單筆表格給findEmpByNo()方法
-//	}
-	
+
 	public void close() throws Exception {
 		rs.close();
 		stmt.close();
@@ -82,5 +75,5 @@ public class VWorkhourADAO {
 		stmt = null;
 		conn = null;
 	}
-	
+
 }

@@ -10,10 +10,14 @@ import javax.servlet.http.HttpSession;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import check.ChineseChange;
 import dao.VWorkhourADAO;
-import model.VWorkhourA;
+import model.Workhours;
 
+@Controller
 public class VWorkhourAController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	VWorkhourADAO vWorkhourADAO = null;
@@ -25,6 +29,11 @@ public class VWorkhourAController extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
+	}
+	
+	@RequestMapping("/managerProSearch1")
+	public String managerAddPro(){
+		return "manager/managerProSearch1";
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -45,7 +54,7 @@ public class VWorkhourAController extends HttpServlet {
 	// 列出單筆員工
 	private void displayWorkhour(HttpServletRequest request,HttpServletResponse response) {
 		VWorkhourADAO vWorkhourADAO = new VWorkhourADAO();
-		List<VWorkhourA> vWorkhourA = null;
+		List<Workhours> vWorkhourA = null;
 		JFrame jf = new JFrame();
 		String proCode = request.getParameter("proCode");
 		
@@ -65,7 +74,7 @@ public class VWorkhourAController extends HttpServlet {
 			}
 		} else {
 			try {
-				vWorkhourA = vWorkhourADAO.findAllWorkhoure(proCode);
+				//vWorkhourA = vWorkhourADAO.findAllWorkhoure(proCode);
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 			} catch (Exception e) {
