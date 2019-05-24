@@ -3,47 +3,101 @@ package controller;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import check.ChineseChange;
-import check.SpaceSv;
-import model.*;
-import dao.*;
-import day.Today;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-public class NWorktimeServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+import check.SpaceSv;
+import dao.NWorktimeDAO;
+import day.Today;
+import model.Emp;
+import model.Workhours;
+
+/**
+ * 新增工時
+ * 
+ * @author 1708004
+ *
+ */
+@Controller
+public class NWorktimeServlet {
+
+	@Autowired
+	private LoginServlet login;
+
 	Emp emp = new Emp();
 	NWorktimeDAO nworktimedao = new NWorktimeDAO();
-	Today today = new Today();
 	Date dayy = new Date();
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	JFrame jf = new JFrame();
 
-	public NWorktimeServlet() {
-		super();
+	@RequestMapping("/saveWorkhours")
+	public String saveWorkhours(Model modal, //
+			@RequestParam("week") String week, //
+			@RequestParam("project") String project, @RequestParam("wt") String wt, @RequestParam("ct") String ct,
+			@RequestParam("ot") String ot, @RequestParam("otc") String otc) {
+
+		return "employee/employee";
 	}
 
-	protected void doGet(HttpServletRequest req, HttpServletResponse res)
-			throws ServletException, IOException {
-		doPost(req, res);
+	@RequestMapping("/newWorkhours")
+	public String newWorkhours(Model modal, //
+			@RequestParam("week") String week, //
+			@RequestParam("projects") String[] project, @RequestParam("wts") String[] wt,
+			@RequestParam("cts") String[] ct, @RequestParam("ots") String[] ot, @RequestParam("otcs") String[] otc) {
+
+		List<String> wtList = Arrays.asList(wt);
+		List<String> ctList = Arrays.asList(ct);
+		List<String> otList = Arrays.asList(ot);
+		List<String> otcList = Arrays.asList(otc);
+		List<String> projectList = Arrays.asList(project);
+		try {
+			for (int i = 0; i < 6; i++) {
+				Workhours workhour = new Workhours();
+				if (i < 5) {
+					workhour.setWhr(Integer.parseInt(wtList.get(i)));
+					workhour.setCont(ctList.get(i));
+				}
+				workhour.setOt(Integer.parseInt(otList.get(i)));
+				workhour.setProCode(projectList.get(i));
+				workhour.setOtCont(otcList.get(i));
+				workhour.setEmpNo(login.getCurrentUser());
+				workhour.setWe(week);
+				workhour.setStat("2");
+				java.util.Date SUDT1 = sdf.parse(sdf.format(Today.getMonDayOfWeek(dayy)));
+				java.sql.Date SQDT1 = new java.sql.Date(SUDT1.getTime()); // util ->
+				workhour.setDd(SQDT1);
+				nworktimedao.insertNW(workhour);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		jf.setAlwaysOnTop(true);
+		JOptionPane.showMessageDialog(jf, "已送出");
+		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		return "employee/employee";
 	}
 
-	protected void doPost(HttpServletRequest req, HttpServletResponse res)
-			throws ServletException, IOException {
-		req.setCharacterEncoding("UTF-8");
-		res.setContentType("text/html; charset=UTF-8");
+	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		String action = req.getParameter("action");
 		if (action == null)
 			return;
 		else if (action.equals("新增")) {
-			req.setAttribute("ST", 2);// 1 狀態:已送出
+
+			// req.setAttribute("ST", 2);// 1 狀態:已送出
 			insertWT(req, res);
 
 			jf.setAlwaysOnTop(true);
@@ -63,11 +117,10 @@ public class NWorktimeServlet extends HttpServlet {
 		}
 	}
 
-	public void insertWT(HttpServletRequest req, HttpServletResponse res)
-			throws ServletException, IOException {
+	public void insertWT(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		String empNo = (String) req.getSession().getAttribute("userNo");
-		int WE = today.getWeekOfYear(dayy);
+		int WE = Today.getWeekOfYear(dayy);
 		String Week = String.valueOf(WE);
 		int i = (Integer) req.getAttribute("ST");
 		SpaceSv ss = new SpaceSv();
@@ -76,50 +129,50 @@ public class NWorktimeServlet extends HttpServlet {
 		String OT1 = req.getParameter("ot1");
 		String PJ1 = ss.pnnull(req.getParameter("project1"));
 		String OTC1 = ss.isnull(req.getParameter("otc1"));
-		Date SDT1 = today.getMonDayOfWeek(dayy);
-		
+		Date SDT1 = Today.getMonDayOfWeek(dayy);
+
 		String WT2 = req.getParameter("wt2");
 		String CT2 = ss.isnull(req.getParameter("ct2"));
 		String OT2 = req.getParameter("ot2");
 		String PJ2 = ss.pnnull(req.getParameter("project2"));
 		String OTC2 = ss.isnull(req.getParameter("otc2"));
-		Date SDT2 = today.getTuesDayOfWeek(dayy);
-		
+		Date SDT2 = Today.getTuesDayOfWeek(dayy);
+
 		String WT3 = req.getParameter("wt3");
 		String CT3 = ss.isnull(req.getParameter("ct3"));
 		String OT3 = req.getParameter("ot3");
 		String PJ3 = ss.pnnull(req.getParameter("project3"));
 		String OTC3 = ss.isnull(req.getParameter("otc3"));
-		Date SDT3 = today.getWednesDayOfWeek(dayy);
-		
+		Date SDT3 = Today.getWednesDayOfWeek(dayy);
+
 		String WT4 = req.getParameter("wt4");
 		String CT4 = ss.isnull(req.getParameter("ct4"));
 		String OT4 = req.getParameter("ot4");
 		String PJ4 = ss.pnnull(req.getParameter("project4"));
 		String OTC4 = ss.isnull(req.getParameter("otc4"));
-		Date SDT4 = today.getThursDayOfWeek(dayy);
-		
+		Date SDT4 = Today.getThursDayOfWeek(dayy);
+
 		String WT5 = req.getParameter("wt5");
 		String CT5 = ss.isnull(req.getParameter("ct5"));
 		String OT5 = req.getParameter("ot5");
 		String PJ5 = ss.pnnull(req.getParameter("project5"));
 		String OTC5 = ss.isnull(req.getParameter("otc5"));
-		Date SDT5 = today.getFriDayOfWeek(dayy);
-		
+		Date SDT5 = Today.getFriDayOfWeek(dayy);
+
 		String WT6 = req.getParameter("wt6");
 		String CT6 = ss.isnull(req.getParameter("ct6"));
 		String OT6 = req.getParameter("ot6");
 		String PJ6 = ss.pnnull(req.getParameter("project6"));
 		String OTC6 = ss.isnull(req.getParameter("otc6"));
-		Date SDT6 = today.getSaturDayOfWeek(dayy);
-		
+		Date SDT6 = Today.getSaturDayOfWeek(dayy);
+
 		String WT7 = req.getParameter("wt7");
 		String CT7 = ss.isnull(req.getParameter("ct7"));
 		String OT7 = req.getParameter("ot7");
 		String PJ7 = ss.pnnull(req.getParameter("project7"));
 		String OTC7 = ss.isnull(req.getParameter("otc7"));
-		Date SDT7 = today.getSunDayOfWeek(dayy);
-		
+		Date SDT7 = Today.getSunDayOfWeek(dayy);
+
 		Workhours workhour1 = new Workhours();
 		Workhours workhour2 = new Workhours();
 		Workhours workhour3 = new Workhours();
@@ -127,7 +180,7 @@ public class NWorktimeServlet extends HttpServlet {
 		Workhours workhour5 = new Workhours();
 		Workhours workhour6 = new Workhours();
 		Workhours workhour7 = new Workhours();
-		
+
 		try {
 			workhour1.setWhr(ss.getInteger(WT1));
 			workhour1.setCont(CT1);
@@ -244,7 +297,6 @@ public class NWorktimeServlet extends HttpServlet {
 			nworktimedao.findproname(workhour7);
 			nworktimedao.insertNW(workhour7);
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();

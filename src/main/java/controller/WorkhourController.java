@@ -19,6 +19,11 @@ import check.TypeChange;
 import dao.WorkhoursDAO;
 import model.Workhours;
 
+/**
+ * 更新工時資料
+ * @author 1708004
+ *
+ */
 @Controller
 public class WorkhourController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -32,27 +37,16 @@ public class WorkhourController extends HttpServlet {
 
 	@RequestMapping("/employeeWorkhourQuery")
 	public String employeeWorkhourQuery(){
-		return "employ/employeeWorkhourQuery";
+		return "employee/employeeWorkhourQuery";
 	}
 	
 	@RequestMapping("/employeeMain")
 	public String employeeMain(){
-		return "employ/employeeMain";
-	}
-	
-	
-	
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		return "employee/employeeMain";
 	}
 	
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		response.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
 		proCode = request.getParameter("proCode");
 
@@ -215,7 +209,6 @@ public class WorkhourController extends HttpServlet {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ServletException se) {
-			// TODO Auto-generated catch block
 			se.printStackTrace();
 		}
 		
@@ -368,7 +361,6 @@ public class WorkhourController extends HttpServlet {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ServletException se) {
-			// TODO Auto-generated catch block
 			se.printStackTrace();
 		}
 		

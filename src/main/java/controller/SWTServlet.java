@@ -25,7 +25,7 @@ public class SWTServlet extends HttpServlet {
 	
 	@RequestMapping("/employee")
 	public String employee(){
-		return "employ/employee";
+		return "employee/employee";
 	}
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -57,7 +57,6 @@ public class SWTServlet extends HttpServlet {
 				req.getRequestDispatcher("employeeWTUpdate.jsp").forward(req, res);
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
