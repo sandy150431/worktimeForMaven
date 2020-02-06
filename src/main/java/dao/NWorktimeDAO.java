@@ -30,7 +30,6 @@ public class NWorktimeDAO {
 		pstmt.setString(8, workhour.getOtCont());
 		pstmt.setString(9, workhour.getStat());
 		pstmt.executeUpdate();
-		conn.commit();
 		pstmt.close();
 		conn.close();
 	}
