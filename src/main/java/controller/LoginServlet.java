@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,15 +19,17 @@ import model.Workhours;
 @Controller
 public class LoginServlet {
 
+	private String currentUser;
+
 	@RequestMapping(path = "/main")
-	protected String main() {
+	public String main() {
 		return "login";
 	}
 	
 	@RequestMapping(path = "/login", method = RequestMethod.POST)
-	protected String doPost(//
+	public String doPost(//
 			@RequestParam(value = "userNo", required = true) String userNo, //
-			@RequestParam(value = "password", required = true) String password) {
+			@RequestParam(value = "password", required = true) String password,Model model) {
 
 		Emp emp = new Emp();
 		emp.setEmpNo(userNo);
@@ -35,29 +38,23 @@ public class LoginServlet {
 		try {
 			String userValidate = logindao.authenticateUser(emp);
 			if (userValidate.equals("Admin")) {
-
-				// req.getSession().setAttribute("userNo", userNo);
-				// req.getRequestDispatcher("/WEB-INF/views/adminMain.jsp").forward(req, res);
 				return "admin/adminMain";
-
 			} else if (userValidate.equals("Manager")) {
-
-				// req.getSession().setAttribute("userNo", userNo);
-				// req.getRequestDispatcher("/WEB-INF/views/managerMain.jsp").forward(req, res);
 				return "manager/managerMain";
-
 			} else if (userValidate.equals("Employee")) {
+				this.currentUser = userNo;
 				String yn = "";
 				Workhours workhour = new Workhours();
 				workhour.setEmpNo(userNo);
 				NWorktimeDAO nworktimedao = new NWorktimeDAO();
+
+				//TODO 查詢是否需要催繳工時訊息
 				yn = nworktimedao.findme(workhour);
 				if (yn.equals("oops")) {
 					// req.getSession().setAttribute("hurry", "盡快繳交當周工時 ! !");
 				}
-				// req.getSession().setAttribute("userNo", userNo);
-				// req.getRequestDispatcher("/WEB-INF/views/employeeMain.jsp").forward(req,
-				// res);
+
+				model.addAttribute("userNo", userNo);
 				return "employee/employeeMain";
 
 			} else {
@@ -78,4 +75,8 @@ public class LoginServlet {
 		}
 		return "login";
 	}
+	
+	 public String getCurrentUser() {
+	        return this.currentUser;
+	    }
 }
