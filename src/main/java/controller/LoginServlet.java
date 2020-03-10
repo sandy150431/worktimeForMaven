@@ -43,16 +43,8 @@ public class LoginServlet {
 				return "manager/managerMain";
 			} else if (userValidate.equals("Employee")) {
 				this.currentUser = userNo;
-				String yn = "";
 				Workhours workhour = new Workhours();
 				workhour.setEmpNo(userNo);
-				NWorktimeDAO nworktimedao = new NWorktimeDAO();
-
-				//TODO 查詢是否需要催繳工時訊息
-				yn = nworktimedao.findme(workhour);
-				if (yn.equals("oops")) {
-					// req.getSession().setAttribute("hurry", "盡快繳交當周工時 ! !");
-				}
 
 				model.addAttribute("userNo", userNo);
 				return "employee/employeeMain";
